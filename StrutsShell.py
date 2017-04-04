@@ -21,6 +21,8 @@ def arguments():
   parser.add_argument('-u','--url', help='Apache Struts vulnerable URL (i.e.: http://www.example.com/test/login.action)')
   args = parser.parse_args()
   debug = args.debug
+  if ('://' not in args.url):	# This will add unvalidated example.com uri with proper http:// scheme 
+	args.url = str('http') + str('://') + str(args.url) 
   if not args.url:
     print errorstring,
     print 'an Apache Struts URL is required (i.e.: http://www.example.com/test/login.action)'
